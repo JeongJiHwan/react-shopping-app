@@ -40,7 +40,7 @@ export default function Auth(SpecificComponent, option, adminRoute = null) {
             <SpecificComponent {...props} user={user} />
         )
     }
-    return AuthenticationCheck
+    return <AuthenticationCheck/>
 }
 
 
