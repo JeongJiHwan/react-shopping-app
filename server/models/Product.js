@@ -29,8 +29,23 @@ const ProductSchema = mongoose.Schema({
     views: {
         type: Number,
         default: 0
+    },
+
+    continents:{
+        type: Number,
+        default: 1
     }
 }, {timestammps: true})
+
+ProductSchema.index({
+    title:'text',
+    description: 'text'
+}, {
+    weights:{
+        title: 5,
+        description: 1
+    }
+})
 
 
 
