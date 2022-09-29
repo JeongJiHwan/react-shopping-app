@@ -17,7 +17,6 @@ function FileUpload(props) {
         axios.post('/api/product/image', formData, config)
             .then(response => {
                 if (response.data.success){
-                    console.log(response.data);
                     setImages([...Images, response.data.filePath]);
                     props.refeshFunction([...Images, response.data.filePath])
                 } else {
