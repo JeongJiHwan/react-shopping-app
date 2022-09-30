@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Badge } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
+
+
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
@@ -20,27 +23,43 @@ function RightMenu(props) {
     });
   };
 
+  const AuthItems = [
+    {
+      key: 'upload',
+      label: <a href='/product/upload'>Upload</a>,
+    },
+    {
+      key: 'cart',
+      label: (<Badge count={3}>
+                <a href='/user/cart' className="head-example" style={{marginRight: -22, color: '#667777'}}>
+                  <ShoppingCartOutlined style={{fontSize: 30, marginBottom: 3}}/>
+                </a>                
+              </Badge>)
+    },
+    {
+      key: 'logout',
+      label: <a onClick={logoutHandler}>Logout</a>
+    }
+  ]
+
+  const NonAuthItems = [
+    {
+      key: "mail",
+      label: <a href="/login">Signin</a>
+    },
+    {
+      key: 'app',
+      label: <a href="/register">Signup</a>
+    }
+  ]
+
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="mail">
-          <a href="/login">Signin</a>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <a href="/register">Signup</a>
-        </Menu.Item>
-      </Menu>
+      <Menu mode={props.mode} items={NonAuthItems}/>
     )
   } else {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="upload">
-          <a href='/product/upload'>Upload</a>
-        </Menu.Item>
-        <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item>
-      </Menu>
+      <Menu mode={props.mode} items={AuthItems}/>
     )
   }
 }

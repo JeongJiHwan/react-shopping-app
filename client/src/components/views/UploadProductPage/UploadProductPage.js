@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
-import {Typography, Button, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
-// const { H2 } = Typography
 const { TextArea } = Input;
 
 const Continents = [
